@@ -1,40 +1,32 @@
-<ion-header >
+<ion-header [style.visibility]="content_visibility">
   <ion-toolbar color="primary">
     <ion-title>
-      QR & Bar Code
+      QR Code
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content [style.visibility]="content_visibility">
 
   <ion-card class="ion-text-center">
-    <ion-card-header>
-      QR Code
-    </ion-card-header>
     <ion-card-content>
       <qrcode 
-        [qrdata]="qrCodeString"
-        [width]="256"
+        [qrdata]="qrCodeString" 
+        [width]="256" 
         [errorCorrectionLevel]="'M'">
       </qrcode>
     </ion-card-content>
   </ion-card>
 
-  <!-- <ion-item *ngIf="scannedResult">
-    <ion-label class="ion-text-wrap">QR Code Scanned Result: {{scannedResult}}</ion-label>
-  </ion-item> -->
-
-  <ion-item>
-    <ion-label class="ion-text-wrap">Scanned Result: </ion-label>
-  </ion-item>
-
   <ion-button 
     expand="block" 
     class="ion-margin" 
-    >
-    Scan
+    (click)="startScan()">
+    Scan QR Code
   </ion-button>
+
+  <ion-item *ngIf="scannedResult">
+    <ion-label class="ion-text-wrap">Scanned Result: {{scannedResult}}</ion-label>
+  </ion-item>
   
 </ion-content>
-
