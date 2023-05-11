@@ -1,27 +1,42 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { IonicModule } from '@ionic/angular';
 import { QRCodeModule } from 'angularx-qrcode';
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
+import * as JsBarcode from 'jsbarcode';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule,QRCodeModule],
+  imports: [IonicModule,QRCodeModule,CommonModule],
 })
 
 
-export class HomePage implements OnDestroy {
+export class HomePage implements OnInit,OnDestroy {
 
   // https://www.npmjs.com/package/angularx-qrcode
   qrCodeString = 'This is a secret qr code message';
+  barCodeString = 'This is a secret bar code message';
   scannedResult: any;
+  //barscannedResult:any;
   content_visibility = '';
 
   constructor(
     // private barcodeScanner: BarcodeScanner
     ) {}
+
+    ngOnInit(): void {
+      JsBarcode("#barcode",  '12345678912', {
+        // format: "pharmacode",
+         lineColor: "#0aa",
+        // width:4,
+        height:180,
+        displayValue: false
+      });
+    }
 
   // startScan() {
   //   this.barcodeScanner.scan().then(barcodeData => {
@@ -55,12 +70,12 @@ export class HomePage implements OnDestroy {
         return;
       }
       await BarcodeScanner.hideBackground();
-      //document.querySelector('body').classList.add('scanner-active') ;
+      document.querySelector('body')?.classList.add('scanner-active');
       this.content_visibility = 'hidden';
       const result = await BarcodeScanner.startScan();
       console.log(result);
       BarcodeScanner.showBackground();
-      // document.querySelector('body').classList.remove('scanner-active');
+      document.querySelector('body')?.classList.remove('scanner-active');
       this.content_visibility = '';
       if(result?.hasContent) {
         this.scannedResult = result.content;
@@ -75,7 +90,7 @@ export class HomePage implements OnDestroy {
   stopScan() {
     BarcodeScanner.showBackground();
     BarcodeScanner.stopScan();
-    // document.querySelector('body').classList.remove('scanner-active');
+    document.querySelector('body')?.classList.remove('scanner-active');
     this.content_visibility = '';
   }
 
