@@ -6,6 +6,12 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import * as JsBarcode from 'jsbarcode';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -17,18 +23,22 @@ import * as JsBarcode from 'jsbarcode';
 
 export class HomePage implements OnInit,OnDestroy {
 
-  // https://www.npmjs.com/package/angularx-qrcode
+  // https://www.npmjs.com/package/angularx-qrcodef
   qrCodeString = 'This is a secret qr code message';
   barCodeString = 'This is a secret bar code message';
   scannedResult: any;
   //barscannedResult:any;
-  content_visibility = '';
+  content_visibility:any = '';
 
   constructor(
+    public http: HttpClient
+    
     // private barcodeScanner: BarcodeScanner
     ) {}
 
     ngOnInit(): void {
+
+
       JsBarcode("#barcode",  '12345678912', {
         // format: "pharmacode",
          lineColor: "#0aa",
@@ -96,6 +106,17 @@ export class HomePage implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
       this.stopScan();
+  }
+
+  async submit(){ 
+    console.log(this.scannedResult);
+    const prduct=this.scannedResult;
+    // // HttpClient.post(this.requesturl, this.scannedResult);
+    this.http.post('https://laravel-305508-default-rtdb.firebaseio.com/prduct.json',prduct )
+    .subscribe((res)=>{
+      console.log(res);
+    });
+   
   }
 
 }

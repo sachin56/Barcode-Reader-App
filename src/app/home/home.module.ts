@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HomePageRoutingModule } from './home-routing.module';
 import { QRCodeModule } from 'angularx-qrcode';
 
@@ -14,7 +14,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    QRCodeModule
+    QRCodeModule,
+    HttpClient,
+    HttpHeaders
   ],
   declarations: [HomePage]
 })
