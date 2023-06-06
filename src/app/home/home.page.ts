@@ -92,7 +92,7 @@ export class HomePage implements OnInit,OnDestroy {
         console.log(this.scannedResult);
       }
     } catch(e) {
-      console.log(e);
+      //console.log(e);
       this.stopScan();
     }
   }
