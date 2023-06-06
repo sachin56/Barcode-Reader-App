@@ -114,7 +114,7 @@ export class HomePage implements OnInit,OnDestroy {
     // // HttpClient.post(this.requesturl, this.scannedResult);
     this.http.post('https://laravel-305508-default-rtdb.firebaseio.com/prduct.json',prduct )
     .subscribe((res)=>{
-      console.log(res);
+      //console.log(res);
     });
    
   }
