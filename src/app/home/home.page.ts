@@ -83,7 +83,7 @@ export class HomePage implements OnInit,OnDestroy {
       document.querySelector('body')?.classList.add('scanner-active');
       this.content_visibility = 'hidden';
       const result = await BarcodeScanner.startScan();
-      console.log(result);
+      //console.log(result);
       BarcodeScanner.showBackground();
       document.querySelector('body')?.classList.remove('scanner-active');
       this.content_visibility = '';
