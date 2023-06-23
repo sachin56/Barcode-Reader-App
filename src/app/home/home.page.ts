@@ -72,7 +72,7 @@ export class HomePage implements OnInit,OnDestroy {
     }
   }
 
-  //data save
+  //data comment
   async startScan() {
     try {
       const permission = await this.checkPermission();
