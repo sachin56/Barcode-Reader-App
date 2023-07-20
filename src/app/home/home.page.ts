@@ -35,7 +35,7 @@ export class HomePage implements OnInit,OnDestroy {
     
     // private barcodeScanner: BarcodeScanner
     ) {}
-
+//
     ngOnInit(): void {
 
 
